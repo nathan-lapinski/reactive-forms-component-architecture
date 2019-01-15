@@ -16,4 +16,7 @@ export class CitySelectComponent implements OnInit {
     this.cities$ = this.citySerivce.getCities();
   }
 
+  valChange(control): void {
+    console.log('Container component received: ', control);
+  }
 }

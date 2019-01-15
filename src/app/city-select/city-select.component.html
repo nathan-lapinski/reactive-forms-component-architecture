@@ -1,1 +1,1 @@
-<app-city-select-ui [cities]="cities$ | async"></app-city-select-ui>
+<app-city-select-ui [cities]="cities$ | async" (citySelect)="valChange($event)"></app-city-select-ui>
