@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CityService } from '../shared/city.service';
+import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
 
 
 
@@ -10,7 +11,12 @@ import { CityService } from '../shared/city.service';
 })
 export class CitySelectComponent implements OnInit {
   cities$;
-  constructor(private citySerivce: CityService) { }
+  city = new FormControl('', TestValidator);
+  constructor(private citySerivce: CityService, private fb: FormBuilder) { }
+
+  form = this.fb.group({
+    citySelect: this.city
+  });
 
   ngOnInit() {
     this.cities$ = this.citySerivce.getCities();
@@ -18,5 +24,13 @@ export class CitySelectComponent implements OnInit {
 
   valChange(control): void {
     console.log('Container component received: ', control);
+    this.city.patchValue(control);
   }
 }
+
+// TODO: Container takes inputs from the preso...and sets them as the value on its control using patchVal?
+const TestValidator = (control: AbstractControl): {[key: string]: boolean} => {
+  console.log('ttt', control, control.value);
+  // TOOD: Need to validate whenever control.value is defined
+  return {};
+};
