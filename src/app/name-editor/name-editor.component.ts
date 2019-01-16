@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormBuilder, AbstractControl, Validators } from '@angular/forms';
 
 @Component({
@@ -6,14 +6,20 @@ import { FormControl, FormBuilder, AbstractControl, Validators } from '@angular/
   templateUrl: './name-editor.component.html',
   styleUrls: ['./name-editor.component.css']
 })
-export class NameEditorComponent {
+export class NameEditorComponent implements OnInit {
   name = new FormControl('', [CustomValidator, Validators.minLength(3)]);
+  @Output() formStatus = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) {}
 
   form = this.fb.group({
     nameSelect: this.name
   });
+
+  ngOnInit() {
+    // TODO: emit formValiidy changes...and value changes?
+    this.form.statusChanges.subscribe(status => this.formStatus.emit(status));
+  }
 
   updateName(name) {
     this.name.patchValue(name);

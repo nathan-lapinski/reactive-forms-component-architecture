@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CityService } from '../shared/city.service';
 import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
 
@@ -10,6 +10,7 @@ import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
   styleUrls: ['./city-select.component.css']
 })
 export class CitySelectComponent implements OnInit {
+  @Output() formStatus = new EventEmitter<any>();
   cities$;
   city = new FormControl('', CustomValidator);
   constructor(private citySerivce: CityService, private fb: FormBuilder) { }
@@ -20,6 +21,8 @@ export class CitySelectComponent implements OnInit {
 
   ngOnInit() {
     this.cities$ = this.citySerivce.getCities();
+    // TODO: emit formValiidy changes...and value changes?
+    this.form.statusChanges.subscribe(status => this.formStatus.emit(status));
   }
 
   valChange(control): void {
