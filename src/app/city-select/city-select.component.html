@@ -1,1 +1,4 @@
 <app-city-select-ui [cities]="cities$ | async" (citySelect)="valChange($event)"></app-city-select-ui>
+<p>The city select container control is valid: {{city.valid}} with the value: {{city.value}}</p>
+<h3>The container formGroup is valid: {{form.valid}}, with the value: {{form.value}}</h3>
+

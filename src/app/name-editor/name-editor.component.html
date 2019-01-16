@@ -1,15 +1,2 @@
-<label>
-  Name:
-  <input type="text" [formControl]="name">
-</label>
-
-
-
-<p>
-  Value: {{ name.value }}
-</p>
-
-
-<p>
-  <button (click)="updateName()">Update Name</button>
-</p>
+<app-name-editor-ui (nameSelect)="updateName($event)"></app-name-editor-ui>
+<h6>Name container is valid: {{form.valid}} with value {{name.value}}</h6>

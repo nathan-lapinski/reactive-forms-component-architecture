@@ -12,7 +12,7 @@ export class CitySelectUIComponent implements OnInit {
   @Output() citySelect = new EventEmitter<any>();
   city = new FormControl('');
 
-  constructor(private fb: FormBuilder) { }
+  constructor() { }
 
   ngOnInit() {
     // does this still work properly if the @Input data changes? Probably need to put this in the OnChanges hook instead

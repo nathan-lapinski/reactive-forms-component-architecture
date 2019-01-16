@@ -11,7 +11,7 @@ import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
 })
 export class CitySelectComponent implements OnInit {
   cities$;
-  city = new FormControl('', TestValidator);
+  city = new FormControl('', CustomValidator);
   constructor(private citySerivce: CityService, private fb: FormBuilder) { }
 
   form = this.fb.group({
@@ -28,9 +28,7 @@ export class CitySelectComponent implements OnInit {
   }
 }
 
-// TODO: Container takes inputs from the preso...and sets them as the value on its control using patchVal?
-const TestValidator = (control: AbstractControl): {[key: string]: boolean} => {
-  console.log('ttt', control, control.value);
-  // TOOD: Need to validate whenever control.value is defined
-  return {};
+const CustomValidator = (control: AbstractControl): {[key: string]: boolean} => {
+  console.log('container componenet: ', control, control.value);
+  return control.value ? null : { noCity: true };
 };
